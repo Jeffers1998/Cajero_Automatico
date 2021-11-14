@@ -8,7 +8,6 @@ public class ConsultaSaldo extends Transaccion{
 		super(numeroCuenta);
 		baseDatos = BaseDeDatos.getInstance();
 		pantalla = Pantalla.getInstance();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
