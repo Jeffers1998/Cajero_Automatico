@@ -20,7 +20,7 @@ public class CajeroAutomatico {
 	
 	public void iniciar() {
 		while(!usuarioAutenticado)
-			numeroCuentaActual = solicitarAutenticacion();
+			solicitarAutenticacion();
 			
 		while(true) {
 			int transaccionEscogida = solicitarTransaccion();
@@ -37,9 +37,20 @@ public class CajeroAutomatico {
 		return false;
 	}
 	
-	private int  solicitarAutenticacion() {
-		//TODO
-		return 0;
+	private void solicitarAutenticacion() {
+		try {
+			pantalla.mostrarMensaje("Por favor, ingrese su numero de cuenta: ");
+			int numeroCuenta = Integer.parseInt(teclado.getEntrada());
+			pantalla.mostrarMensaje("Ingrese su PIN");
+			int pin = Integer.parseInt(teclado.getEntrada());
+			usuarioAutenticado = baseDatos.autenticarUsuario(numeroCuenta, pin);
+			
+			if(usuarioAutenticado)
+				numeroCuentaActual = numeroCuenta;
+			
+		}catch(NumberFormatException e) {
+			pantalla.mostrarMensaje("No se ha ingresado un número");
+		}
 	}
 	
 	private int solicitarTransaccion() {
