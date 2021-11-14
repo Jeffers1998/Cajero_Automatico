@@ -11,6 +11,8 @@ public class BaseDeDatos {
 	private BaseDeDatos() {
 		cuentas = new Cuenta[3];
 		cuentas[0] = new Cuenta(1, 1234, 200, 300);
+		cuentas[1] = new Cuenta(2, 5678, 500, 600);
+		cuentas[2] = new Cuenta(3, 4321, 1000, 1100);
 	}
 	/**
 	 * 
