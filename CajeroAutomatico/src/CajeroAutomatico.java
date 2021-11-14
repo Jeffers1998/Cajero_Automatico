@@ -33,8 +33,7 @@ public class CajeroAutomatico {
 	}
 	
 	private boolean seEscogioSalir(int transaccionEscogida) {
-		//TODO
-		return false;
+		return transaccionEscogida == -1;
 	}
 	
 	private void solicitarAutenticacion() {
@@ -54,8 +53,17 @@ public class CajeroAutomatico {
 	}
 	
 	private int solicitarTransaccion() {
-		//TODO
-		return 0;
+		pantalla.mostrarMensaje("Seleccione una opcion:\na. Realizar un retiro\nb.Consultar cuenta");
+		String entrada = teclado.getEntrada();
+		
+		switch(entrada) {
+		case "a":
+			return Transaccion.RETIRO;
+		case "b":
+			return Transaccion.CONSULTA_SALDO;
+		}
+		
+		return -1;
 	}
 	
 }
