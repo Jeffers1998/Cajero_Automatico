@@ -19,21 +19,22 @@ public class Cuenta {
 	 * @return true si el pin es valido y false en caso contrario
 	 */
 	public boolean validarPin(int pin) {
-		//TODO
-		return false;
+		return this.pin == pin;
 	}
 	
 	public void retirarDinero(double cantidad) {
-		//TODO Disminuir la cantidad de dinero pasada como parametro al saldo disponible y al total.
+		this.saldoDisponible = this.saldoDisponible - cantidad;
 	}
 	
 	public double getSaldoDisponible() {
-		//TODO
-		return 0;
+		return saldoDisponible;
 	}
 	
 	public double getSaldoTotal() {
-		//TODO
-		return 0;
+		return saldoTotal;
+	}
+	// añadi este método para que se pudiera solicitar el número de cuenta desde la base de datos ya q pusieron private
+	public int getNumCuenta() {
+		return numeroCuenta;
 	}
 }
