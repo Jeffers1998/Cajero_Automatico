@@ -14,7 +14,9 @@ public class DispensadorDinero {
 	 * 
 	 * @param cantidad La cantidad de dinero a expulsar
 	 */
-	public void expulsarDinero(int cantidad) {
+	public void expulsarDinero(double cantidad) {
+		
+		
 		//TODO disminuir la cantidad de dinero disponible
 	}
 	

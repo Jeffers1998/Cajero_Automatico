@@ -8,7 +8,10 @@ public class Teclado {
 	
 	private Teclado() {};
 	public String getEntrada() {
+		
+		
 		//TODO devuelve el texto introducio por consola
+		
 		return null;
 	}
 }
