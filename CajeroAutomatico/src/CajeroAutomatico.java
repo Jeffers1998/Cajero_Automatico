@@ -46,6 +46,8 @@ public class CajeroAutomatico {
 			
 			if(usuarioAutenticado)
 				numeroCuentaActual = numeroCuenta;
+			else
+				pantalla.mostrarMensaje("Usuario o PIN incorrectos");
 			
 		}catch(NumberFormatException e) {
 			pantalla.mostrarMensaje("No se ha ingresado un número");
@@ -53,7 +55,7 @@ public class CajeroAutomatico {
 	}
 	
 	private int solicitarTransaccion() {
-		pantalla.mostrarMensaje("Seleccione una opcion:\na. Realizar un retiro\nb.Consultar cuenta");
+		pantalla.mostrarMensaje("Seleccione una opcion:\na. Realizar un retiro\nb. Consultar cuenta");
 		String entrada = teclado.getEntrada();
 		
 		switch(entrada) {
