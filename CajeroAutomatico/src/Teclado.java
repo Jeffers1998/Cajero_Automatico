@@ -1,17 +1,18 @@
+import java.util.Scanner;
 
 public class Teclado {
 	private static Teclado instance = new Teclado();
+	private Scanner sc;
 	
 	public static Teclado getInstance() {
 		return instance;
 	}
 	
-	private Teclado() {};
+	private Teclado() {
+		sc = new Scanner(System.in);
+	}
+	
 	public String getEntrada() {
-		
-		
-		//TODO devuelve el texto introducio por consola
-		
-		return null;
+		return sc.next();
 	}
 }

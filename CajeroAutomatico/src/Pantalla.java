@@ -9,6 +9,6 @@ public class Pantalla {
 	}
 	
 	public void mostrarMensaje(String mensaje) {
-		//TODO Muestra el mensaje en consola
+		System.out.println(mensaje);
 	}
 }
