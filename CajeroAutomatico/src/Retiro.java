@@ -21,11 +21,11 @@ public class Retiro extends Transaccion{
 
 	@Override
 	public void realizar() {
-		pantalla.mostrarMensaje("Seleccionar Monto /n"
-				+ "	a. " + retiro1 + "/n"
-				+ " b. " + retiro2 + "/n"
-				+ " c. " + retiro3 + "/n"
-				+ " d. " + retiro4 + "/n");
+		pantalla.mostrarMensaje("Seleccionar Monto \n"
+				+ " a. " + retiro1 + "\n"
+				+ " b. " + retiro2 + "\n"
+				+ " c. " + retiro3 + "\n"
+				+ " d. " + retiro4 + "\n");
 		double cantidad = 0;
 		switch(teclado.getEntrada()) {
 		case "a":
