@@ -13,8 +13,9 @@ public class ConsultaSaldo extends Transaccion{
 
 	@Override
 	public void realizar() {
-		// TODO Consultar con BaseDeDatos cual es el saldo de la cuenta actual (utilizar la variable numeroCuenta)
-		
+		double saldoDisponible = baseDatos.getDineroDisponible(numeroCuenta);
+		pantalla.mostrarMensaje("id: " + numeroCuenta + "/n" 
+								+ "Saldo Disponible: " + saldoDisponible);
 	}
 
 }

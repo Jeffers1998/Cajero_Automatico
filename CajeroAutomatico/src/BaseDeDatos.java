@@ -19,7 +19,11 @@ public class BaseDeDatos {
 	 * @return true si es que el usuario y PIN son válidos y false en caso contrario. 
 	 */
 	public boolean autenticarUsuario(int numeroCuenta, int pin) {
-		//TODO Comunicarse con una de las cuentas del arreglo cuetnas mediante el metodo validarPin
+		for(Cuenta a: cuentas) {
+			if(a.getNumCuenta() ==  numeroCuenta) {
+				return a.validarPin(pin);
+			}
+		}
 		return false;
 	}
 	
@@ -29,18 +33,32 @@ public class BaseDeDatos {
 	 * @return Devuelve el dinero disponible de la cuenta que tiene el numero proporcionado
 	 */
 	public double getDineroDisponible(int numeroCuenta) {
-		//TODO Usar el metodo getSaldoDisponible de la clase Cuenta
-		return 0;
+		for(Cuenta a: cuentas) {
+			if(a.getNumCuenta() ==  numeroCuenta) {
+				return a.getSaldoDisponible();
+			}
+		}
+		return -1;
 	}
 	
 	
 	public double getSaldoTotal(int numeroCuenta) {
-		//TODO  Usar el metodo getSaldoTotal de la clase Cuenta
-		return 0;
+		for(Cuenta a: cuentas) {
+			if(a.getNumCuenta() ==  numeroCuenta) {
+				return a.getSaldoTotal();
+			}
+		}
+		return -1;
 	}
 	
-	public void retirarDinero(int numeroCuenta, int cantidad) {
-		//TODO Usar el metodo retirar dinero de la clase Cuenta
+	public void retirarDinero(int numeroCuenta, double cantidad) {
+		
+		for(Cuenta a: cuentas) {
+			if(a.getNumCuenta() ==  numeroCuenta) {
+				a.retirarDinero(cantidad);
+			}
+		}
+		
 	}
 	
 }
