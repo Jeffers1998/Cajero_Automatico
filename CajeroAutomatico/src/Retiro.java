@@ -15,8 +15,8 @@ public class Retiro extends Transaccion{
 		super(numeroCuenta);
 		dispensador = DispensadorDinero.getInstance();
 		teclado = Teclado.getInstance();
-		pantalla = pantalla.getInstance();
-		baseDatos = baseDatos.getInstance();
+		pantalla = Pantalla.getInstance();
+		baseDatos = BaseDeDatos.getInstance();
 	}
 
 	@Override
@@ -44,6 +44,10 @@ public class Retiro extends Transaccion{
 		
 		baseDatos.retirarDinero(numeroCuenta, cantidad);
 		dispensador.expulsarDinero(cantidad);
+		pantalla.mostrarMensaje("Retiro Exitoso: \n"
+				+ "Id Cuenta: " + numeroCuenta + "\n"
+				+ "Retiro: " + cantidad + "\n"
+				+ "Actual: " + baseDatos.getDineroDisponible(numeroCuenta));
 	}
 
 }

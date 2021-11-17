@@ -4,7 +4,7 @@ public class CajeroAutomatico {
 	
 	private Pantalla pantalla;
 	private Teclado teclado;
-	private DispensadorDinero dispensador;
+	//private DispensadorDinero dispensador; No se usa
 	
 	private BaseDeDatos baseDatos;
 	private int numeroCuentaActual;
@@ -13,7 +13,7 @@ public class CajeroAutomatico {
 		
 		pantalla = Pantalla.getInstance();
 		teclado = Teclado.getInstance();
-		dispensador = DispensadorDinero.getInstance();
+		//dispensador = DispensadorDinero.getInstance(); No se usa
 		
 		baseDatos = BaseDeDatos.getInstance();
 	}
