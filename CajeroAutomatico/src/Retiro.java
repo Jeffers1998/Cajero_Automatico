@@ -17,6 +17,7 @@ public class Retiro extends Transaccion{
 		teclado = Teclado.getInstance();
 		pantalla = Pantalla.getInstance();
 		baseDatos = BaseDeDatos.getInstance();
+		baseDatos = null;
 	}
 
 	@Override
