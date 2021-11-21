@@ -46,7 +46,7 @@ public class Retiro extends Transaccion{
 
 		if(montoRetiro <= dispensador.getCantidadDinero()){
 			baseDatos.retirarDinero(numeroCuenta, montoRetiro);
-			dispensador.expulsarDinero(montoRetiro);
+			dispensador.setCantidadDinero((int) (dispensador.getCantidadDinero() - montoRetiro));
 		}
 
 		pantalla.mostrarMensaje("Retiro Exitoso: \n"

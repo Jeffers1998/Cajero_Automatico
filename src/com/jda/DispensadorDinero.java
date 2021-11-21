@@ -11,15 +11,12 @@ public class DispensadorDinero {
 	public static DispensadorDinero getInstance() {
 		return instance;
 	}
-	/**
-	 * 
-	 * @param cantidad La cantidad de dinero a expulsar
-	 */
-	public void expulsarDinero(double cantidad) {
-		cantidadDinero -= cantidad;
-	}
 
 	public int getCantidadDinero() {
 		return cantidadDinero;
+	}
+
+	public void setCantidadDinero(int cantidadDinero) {
+		this.cantidadDinero = cantidadDinero;
 	}
 }
