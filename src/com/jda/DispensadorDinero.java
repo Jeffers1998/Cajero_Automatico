@@ -18,13 +18,8 @@ public class DispensadorDinero {
 	public void expulsarDinero(double cantidad) {
 		cantidadDinero -= cantidad;
 	}
-	
-	/**
-	 * 
-	 * @param cantidad La cantidad de dinero que se quiere retirar
-	 * @return true si es que hay suficiente dinero y false en caso contrario
-	 */
-	public boolean haySuficienteDineroDisponible(double cantidad) {
-		return cantidad <= cantidadDinero;
+
+	public int getCantidadDinero() {
+		return cantidadDinero;
 	}
 }

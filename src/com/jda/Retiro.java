@@ -44,7 +44,7 @@ public class Retiro extends Transaccion{
 				montoRetiro = 0;
 		}
 
-		if(dispensador.haySuficienteDineroDisponible(montoRetiro)){
+		if(montoRetiro <= dispensador.getCantidadDinero()){
 			baseDatos.retirarDinero(numeroCuenta, montoRetiro);
 			dispensador.expulsarDinero(montoRetiro);
 		}
