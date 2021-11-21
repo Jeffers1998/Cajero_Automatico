@@ -36,8 +36,7 @@ public class CajeroAutomatico {
 	private void solicitarAutenticacion() {
 		try {
 			int numeroCuenta = getNumeroCuenta();
-			pantalla.mostrarMensaje("Ingrese su PIN");
-			int pin = Integer.parseInt(teclado.getEntrada());
+			int pin = getPin();
 			usuarioAutenticado = baseDatos.autenticarUsuario(numeroCuenta, pin);
 			
 			if(usuarioAutenticado)
@@ -48,6 +47,12 @@ public class CajeroAutomatico {
 		}catch(NumberFormatException e) {
 			pantalla.mostrarMensaje("No se ha ingresado un n�mero");
 		}
+	}
+
+	private int getPin() {
+		pantalla.mostrarMensaje("Ingrese su PIN");
+		int pin = Integer.parseInt(teclado.getEntrada());
+		return pin;
 	}
 
 	private int getNumeroCuenta() {
