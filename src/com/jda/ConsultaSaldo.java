@@ -13,9 +13,9 @@ public class ConsultaSaldo extends Transaccion{
 
 	@Override
 	public void realizar() {
-		double saldoDisponible = baseDatos.getDineroDisponible(numeroCuenta);
 		pantalla.mostrarMensaje("id: " + numeroCuenta + "\n" 
-								+ "Saldo Disponible: " + saldoDisponible);
+								+ "Saldo Disponible: " + baseDatos.getDineroDisponible(numeroCuenta) + "\n"
+								+ "Saldo Total: " + baseDatos.getSaldoTotal(numeroCuenta));
 	}
 
 }

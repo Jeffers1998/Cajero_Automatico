@@ -24,7 +24,9 @@ public class Cuenta {
 	}
 	
 	public void retirarDinero(double cantidad) {
-		this.saldoDisponible = this.saldoDisponible - cantidad;
+
+		this.saldoDisponible -=   cantidad;
+		this.saldoTotal -=   cantidad;
 	}
 	
 	public double getSaldoDisponible() {

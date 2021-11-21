@@ -22,12 +22,11 @@ public class BaseDeDatos {
 	 * @return true si es que el usuario y PIN son v�lidos y false en caso contrario. 
 	 */
 	public boolean autenticarUsuario(int numeroCuenta, int pin) {
-		for(Cuenta a: cuentas) {
-			if(a.getNumCuenta() ==  numeroCuenta) {
-				return a.validarPin(pin);
-			}
+		try{
+			return  buscarCuenta(numeroCuenta).validarPin(pin);
+		}catch (Exception e){
+			return false;
 		}
-		return false;
 	}
 	
 	/**
@@ -36,32 +35,33 @@ public class BaseDeDatos {
 	 * @return Devuelve el dinero disponible de la cuenta que tiene el numero proporcionado
 	 */
 	public double getDineroDisponible(int numeroCuenta) {
-		for(Cuenta a: cuentas) {
-			if(a.getNumCuenta() ==  numeroCuenta) {
-				return a.getSaldoDisponible();
-			}
+		try{
+			return buscarCuenta(numeroCuenta).getSaldoDisponible();
+		}catch (Exception e){
+			return -1;
 		}
-		return -1;
 	}
 	
-	
 	public double getSaldoTotal(int numeroCuenta) {
-		for(Cuenta a: cuentas) {
-			if(a.getNumCuenta() ==  numeroCuenta) {
-				return a.getSaldoTotal();
-			}
+		try{
+			return buscarCuenta(numeroCuenta).getSaldoTotal();
+		}catch (Exception e){
+			return -1;
 		}
-		return -1;
 	}
 	
 	public void retirarDinero(int numeroCuenta, double cantidad) {
-		
-		for(Cuenta a: cuentas) {
-			if(a.getNumCuenta() ==  numeroCuenta) {
-				a.retirarDinero(cantidad);
+		buscarCuenta(numeroCuenta).retirarDinero(cantidad);
+	}
+
+	private Cuenta buscarCuenta(int numeroCuenta){
+		Cuenta cuenta = null;
+		for(Cuenta miCuenta: cuentas){
+			if(miCuenta.getNumCuenta() == numeroCuenta){
+				return miCuenta;
 			}
 		}
-		
+		return cuenta;
 	}
 	
 }
