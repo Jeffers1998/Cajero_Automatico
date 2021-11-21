@@ -26,28 +26,32 @@ public class Retiro extends Transaccion{
 				+ " b. " + retiro2 + "\n"
 				+ " c. " + retiro3 + "\n"
 				+ " d. " + retiro4 + "\n");
-		double cantidad;
+		double montoRetiro;
 		switch(teclado.getEntrada()) {
 			case "a":
-				cantidad = retiro1;
+				montoRetiro = retiro1;
 				break;
 			case "b":
-				cantidad = retiro2;
+				montoRetiro = retiro2;
 				break;
 			case "c":
-				cantidad = retiro3;
+				montoRetiro = retiro3;
 				break;
 			case "d":
-				cantidad = retiro4;
+				montoRetiro = retiro4;
 				break;
 			default:
-				cantidad = 0;
+				montoRetiro = 0;
 		}
-		baseDatos.retirarDinero(numeroCuenta, cantidad);
-		dispensador.expulsarDinero(cantidad);
+
+		if(dispensador.haySuficienteDineroDisponible(montoRetiro)){
+			baseDatos.retirarDinero(numeroCuenta, montoRetiro);
+			dispensador.expulsarDinero(montoRetiro);
+		}
+
 		pantalla.mostrarMensaje("Retiro Exitoso: \n"
 				+ "Id Cuenta: " + numeroCuenta + "\n"
-				+ "Retiro: " + cantidad + "\n"
+				+ "Retiro: " + montoRetiro + "\n"
 				+ "Saldo Diponible: " + baseDatos.getDineroDisponible(numeroCuenta) + "\n"
 		        + "Saldo Total: " + baseDatos.getSaldoTotal(numeroCuenta));
 	}
