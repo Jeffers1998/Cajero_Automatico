@@ -21,7 +21,7 @@ public class CajeroAutomatico {
 			
 		while(true) {
 			int transaccionEscogida = solicitarTransaccion();
-			if(!seEscogioSalir(transaccionEscogida)) {
+			if(! (transaccionEscogida == -1)) {
 				Transaccion transaccionActual = Transaccion.crearTransaccion(transaccionEscogida, numeroCuentaActual);
 				transaccionActual.realizar();
 			}else
@@ -29,16 +29,10 @@ public class CajeroAutomatico {
 		}
 	}
 	
-	private boolean seEscogioSalir(int transaccionEscogida) {
-		return transaccionEscogida == -1;
-	}
-	
 	private void solicitarAutenticacion() {
 		try {
-			pantalla.mostrarMensaje("Por favor, ingrese su numero de cuenta: ");
-			int numeroCuenta = Integer.parseInt(teclado.getEntrada());
-			pantalla.mostrarMensaje("Ingrese su PIN");
-			int pin = Integer.parseInt(teclado.getEntrada());
+			int numeroCuenta = getNumeroCuenta();
+			int pin = getPin();
 			usuarioAutenticado = baseDatos.autenticarUsuario(numeroCuenta, pin);
 			
 			if(usuarioAutenticado)
@@ -50,7 +44,19 @@ public class CajeroAutomatico {
 			pantalla.mostrarMensaje("No se ha ingresado un n�mero");
 		}
 	}
-	
+
+	private int getPin() {
+		pantalla.mostrarMensaje("Ingrese su PIN");
+		int pin = Integer.parseInt(teclado.getEntrada());
+		return pin;
+	}
+
+	private int getNumeroCuenta() {
+		pantalla.mostrarMensaje("Por favor, ingrese su numero de cuenta: ");
+		return Integer.parseInt(teclado.getEntrada());
+	}
+
+
 	private int solicitarTransaccion() {
 		pantalla.mostrarMensaje("Seleccione una opcion:\na. Realizar un retiro\nb. Consultar cuenta");
 		String entrada = teclado.getEntrada();
