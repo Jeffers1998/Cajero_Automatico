@@ -35,8 +35,7 @@ public class CajeroAutomatico {
 	
 	private void solicitarAutenticacion() {
 		try {
-			pantalla.mostrarMensaje("Por favor, ingrese su numero de cuenta: ");
-			int numeroCuenta = Integer.parseInt(teclado.getEntrada());
+			int numeroCuenta = getNumeroCuenta();
 			pantalla.mostrarMensaje("Ingrese su PIN");
 			int pin = Integer.parseInt(teclado.getEntrada());
 			usuarioAutenticado = baseDatos.autenticarUsuario(numeroCuenta, pin);
@@ -50,7 +49,13 @@ public class CajeroAutomatico {
 			pantalla.mostrarMensaje("No se ha ingresado un n�mero");
 		}
 	}
-	
+
+	private int getNumeroCuenta() {
+		pantalla.mostrarMensaje("Por favor, ingrese su numero de cuenta: ");
+		return Integer.parseInt(teclado.getEntrada());
+	}
+
+
 	private int solicitarTransaccion() {
 		pantalla.mostrarMensaje("Seleccione una opcion:\na. Realizar un retiro\nb. Consultar cuenta");
 		String entrada = teclado.getEntrada();
