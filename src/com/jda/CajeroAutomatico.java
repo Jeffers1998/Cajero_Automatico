@@ -21,16 +21,12 @@ public class CajeroAutomatico {
 			
 		while(true) {
 			int transaccionEscogida = solicitarTransaccion();
-			if(!seEscogioSalir(transaccionEscogida)) {
+			if(! (transaccionEscogida == -1)) {
 				Transaccion transaccionActual = Transaccion.crearTransaccion(transaccionEscogida, numeroCuentaActual);
 				transaccionActual.realizar();
 			}else
 				break;
 		}
-	}
-	
-	private boolean seEscogioSalir(int transaccionEscogida) {
-		return transaccionEscogida == -1;
 	}
 	
 	private void solicitarAutenticacion() {
