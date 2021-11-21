@@ -5,7 +5,7 @@ public abstract class Transaccion {
 	public static final  int RETIRO = 0; 
 	public static final int CONSULTA_SALDO = 1;
 	
-	public int numeroCuenta; //El numero de cuenta en el cual se va a hacer la transaccion, Ariel: lo cambie a p�blico porque lo necesitaba en retiro y en consultar saldo
+	public int numeroCuenta;
 	
 	
 	public Transaccion(int numeroCuenta) {
@@ -19,8 +19,8 @@ public abstract class Transaccion {
 	 * @param tipo El tipo de transaccion a crear. Usar las variables estaticas de la clase Transaccion
 	 * @return La instancia de la clase Transaccion
 	 */
-	public static Transaccion crearTransaccion(int tipo, int numeroCuenta) { // Ariel: no deber�a recibir numeroCuenta si ya lo tengo en el constructor 
-		Transaccion myTransaccion = null; // Ariel: no estoy seguro de esto pero solo estamos en el flujo b�sico
+	public static Transaccion crearTransaccion(int tipo, int numeroCuenta) {
+		Transaccion myTransaccion = null;
 		switch (tipo) {
 			case RETIRO: 
 				myTransaccion = new Retiro(numeroCuenta);  
