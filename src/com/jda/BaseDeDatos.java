@@ -1,13 +1,13 @@
 package com.jda;
 
 public class BaseDeDatos {
-	private static BaseDeDatos instance = new BaseDeDatos();
+	private static final BaseDeDatos instance = new BaseDeDatos();
 	
 	public static BaseDeDatos getInstance() {
 		return instance;
 	}
 	
-	private Cuenta[] cuentas;
+	private final Cuenta[] cuentas;
 	
 	private BaseDeDatos() {
 		cuentas = new Cuenta[3];
@@ -22,11 +22,10 @@ public class BaseDeDatos {
 	 * @return true si es que el usuario y PIN son v�lidos y false en caso contrario. 
 	 */
 	public boolean autenticarUsuario(int numeroCuenta, int pin) {
-		try{
-			return  buscarCuenta(numeroCuenta).validarPin(pin);
-		}catch (Exception e){
-			return false;
+		if (buscarCuenta(numeroCuenta) != null) {
+			return buscarCuenta(numeroCuenta).validarPin(pin);
 		}
+		return false;
 	}
 	
 	/**
@@ -35,32 +34,34 @@ public class BaseDeDatos {
 	 * @return Devuelve el dinero disponible de la cuenta que tiene el numero proporcionado
 	 */
 	public double getDineroDisponible(int numeroCuenta) {
-		try{
-			return buscarCuenta(numeroCuenta).getSaldoDisponible();
-		}catch (Exception e){
-			return -1;
+		if (buscarCuenta(numeroCuenta) != null) {
+			return buscarCuenta(numeroCuenta).getSaldoTotal();
 		}
+		return -1;
 	}
 	
 	public double getSaldoTotal(int numeroCuenta) {
-		try{
+		if (buscarCuenta(numeroCuenta) != null) {
 			return buscarCuenta(numeroCuenta).getSaldoTotal();
-		}catch (Exception e){
-			return -1;
 		}
+		return -1;
 	}
 	
 	public void retirarDinero(int numeroCuenta, double cantidad) {
-		buscarCuenta(numeroCuenta).retirarDinero(cantidad);
+		if (buscarCuenta(numeroCuenta) != null) {
+			buscarCuenta(numeroCuenta).retirarDinero(cantidad);
+		}
 	}
 
 	private Cuenta buscarCuenta(int numeroCuenta){
-		Cuenta cuenta = null;
+		Cuenta cuenta;
 		for(Cuenta miCuenta: cuentas){
 			if(miCuenta.getNumCuenta() == numeroCuenta){
-				return miCuenta;
+				cuenta = miCuenta;
+				return cuenta;
 			}
 		}
+		cuenta = null;
 		return cuenta;
 	}
 	
