@@ -27,7 +27,7 @@ public abstract class Transaccion {
 				break;
 			case CONSULTA_SALDO:
 				myTransaccion = new ConsultaSaldo(numeroCuenta);
-		
+				break;
 		}
 		return myTransaccion;
 	}
