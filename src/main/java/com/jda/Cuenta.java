@@ -1,4 +1,4 @@
-package main.java.com.jda;
+package com.jda;
 
 public class Cuenta {
 	private int numeroCuenta;
