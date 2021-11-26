@@ -1,4 +1,4 @@
-package com.jda;
+package main.java.com.jda;
 
 public class BaseDeDatos {
 	private static final BaseDeDatos instance = new BaseDeDatos();

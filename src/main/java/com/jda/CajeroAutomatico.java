@@ -1,4 +1,4 @@
-package com.jda;
+package main.java.com.jda;
 
 public class CajeroAutomatico {
 	private boolean usuarioAutenticado;

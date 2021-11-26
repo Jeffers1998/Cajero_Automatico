@@ -1,4 +1,4 @@
-package com.jda;
+package main.java.com.jda;
 
 public abstract class Transaccion {
 	//Variables estaticas usadas como opciones para el metodo crearTransaccion

@@ -1,4 +1,4 @@
-package com.jda;
+package main.java.com.jda;
 
 public class Pantalla {
 	private static Pantalla instance = new Pantalla();
