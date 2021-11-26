@@ -1,4 +1,5 @@
-package main.java.com.jda;
+package com.jda;
+
 import java.util.Scanner;
 
 public class Teclado {
