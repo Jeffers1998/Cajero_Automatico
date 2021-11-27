@@ -2,8 +2,10 @@ package com.jda;
 
 public abstract class Transaccion {
 	//Variables estaticas usadas como opciones para el metodo crearTransaccion
-	public static final  int RETIRO = 0; 
+	public static final  int RETIRO = 0;
+
 	public static final int CONSULTA_SALDO = 1;
+	public static final int DEPOSITO = 2;
 	
 	public int numeroCuenta;
 	
@@ -27,6 +29,9 @@ public abstract class Transaccion {
 				break;
 			case CONSULTA_SALDO:
 				myTransaccion = new ConsultaSaldo(numeroCuenta);
+				break;
+			case DEPOSITO:
+				myTransaccion = new Deposito(numeroCuenta);
 				break;
 		}
 		return myTransaccion;
