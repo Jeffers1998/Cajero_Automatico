@@ -1,10 +1,11 @@
+package com.jda;
 
 public abstract class Transaccion {
 	//Variables estaticas usadas como opciones para el metodo crearTransaccion
-	public static int RETIRO = 0; 
-	public static int CONSULTA_SALDO = 1;
+	public static final  int RETIRO = 0; 
+	public static final int CONSULTA_SALDO = 1;
 	
-	private int numeroCuenta; //El numero de cuenta en el cual se va a hacer la transaccion
+	public int numeroCuenta;
 	
 	
 	public Transaccion(int numeroCuenta) {
@@ -19,8 +20,16 @@ public abstract class Transaccion {
 	 * @return La instancia de la clase Transaccion
 	 */
 	public static Transaccion crearTransaccion(int tipo, int numeroCuenta) {
-		//TODO Devolver una instancia de las clases hijas en base al tipo de transaccion pasado como parametro.
-		return null;
+		Transaccion myTransaccion = null;
+		switch (tipo) {
+			case RETIRO: 
+				myTransaccion = new Retiro(numeroCuenta);  
+				break;
+			case CONSULTA_SALDO:
+				myTransaccion = new ConsultaSaldo(numeroCuenta);
+				break;
+		}
+		return myTransaccion;
 	}
 	
 }

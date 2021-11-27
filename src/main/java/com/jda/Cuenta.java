@@ -1,3 +1,4 @@
+package com.jda;
 
 public class Cuenta {
 	private int numeroCuenta;
@@ -19,21 +20,24 @@ public class Cuenta {
 	 * @return true si el pin es valido y false en caso contrario
 	 */
 	public boolean validarPin(int pin) {
-		//TODO
-		return false;
+		return this.pin == pin;
 	}
 	
 	public void retirarDinero(double cantidad) {
-		//TODO Disminuir la cantidad de dinero pasada como parametro al saldo disponible y al total.
+
+		this.saldoDisponible -=   cantidad;
+		this.saldoTotal -=   cantidad;
 	}
 	
 	public double getSaldoDisponible() {
-		//TODO
-		return 0;
+		return saldoDisponible;
 	}
 	
 	public double getSaldoTotal() {
-		//TODO
-		return 0;
+		return saldoTotal;
+	}
+	// a�adi este m�todo para que se pudiera solicitar el n�mero de cuenta desde la base de datos ya q pusieron private
+	public int getNumCuenta() {
+		return numeroCuenta;
 	}
 }

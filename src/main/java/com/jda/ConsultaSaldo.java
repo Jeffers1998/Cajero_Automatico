@@ -1,4 +1,4 @@
-
+package com.jda;
 public class ConsultaSaldo extends Transaccion{
 
 	private BaseDeDatos baseDatos;
@@ -8,13 +8,13 @@ public class ConsultaSaldo extends Transaccion{
 		super(numeroCuenta);
 		baseDatos = BaseDeDatos.getInstance();
 		pantalla = Pantalla.getInstance();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void realizar() {
-		// TODO Consultar con BaseDeDatos cual es el saldo de la cuenta actual (utilizar la variable numeroCuenta)
-		
+		pantalla.mostrarMensaje("id: " + numeroCuenta + "\n" 
+								+ "Saldo Disponible: " + baseDatos.getDineroDisponible(numeroCuenta) + "\n"
+								+ "Saldo Total: " + baseDatos.getSaldoTotal(numeroCuenta));
 	}
 
 }
