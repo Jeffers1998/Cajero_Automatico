@@ -58,7 +58,7 @@ public class CajeroAutomatico {
 
 
 	private int solicitarTransaccion() {
-		pantalla.mostrarMensaje("Seleccione una opcion:\na. Realizar un retiro\nb. Consultar cuenta");
+		pantalla.mostrarMensaje("Seleccione una opcion:\na. Realizar un retiro\nb. Consultar cuenta\nc. Realizar un deposito");
 		String entrada = teclado.getEntrada();
 		
 		switch(entrada) {
@@ -66,6 +66,9 @@ public class CajeroAutomatico {
 			return Transaccion.RETIRO;
 		case "b":
 			return Transaccion.CONSULTA_SALDO;
+			case "c":
+
+		    return Transaccion.DEPOSITO;
 		}
 		
 		return -1;
