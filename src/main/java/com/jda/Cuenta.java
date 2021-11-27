@@ -40,4 +40,9 @@ public class Cuenta {
 	public int getNumCuenta() {
 		return numeroCuenta;
 	}
+
+	public void depositarDinero(double cantidad) {
+		this.saldoTotal += cantidad;
+
+	}
 }
