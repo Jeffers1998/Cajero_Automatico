@@ -56,15 +56,22 @@ public class BaseDeDatos {
 			buscarCuenta(numeroCuenta).retirarDinero(cantidad);
 		}
 	}
+	public void depositarDinero(int numeroCuenta, double cantidad ) {
+		if (buscarCuenta(numeroCuenta) != null) {
+			buscarCuenta(numeroCuenta).depositarDinero(cantidad);
+
+		}
+	}
 
 	private Cuenta buscarCuenta(int numeroCuenta){
 		Cuenta cuenta;
-		for(Cuenta miCuenta: cuentas){
-			if(miCuenta.getNumCuenta() == numeroCuenta){
+		for(Cuenta miCuenta: cuentas) {
+			if (miCuenta.getNumCuenta() == numeroCuenta) {
 				cuenta = miCuenta;
 				return cuenta;
 			}
 		}
+
 		cuenta = null;
 		return cuenta;
 	}
