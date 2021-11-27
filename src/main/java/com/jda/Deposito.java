@@ -45,7 +45,7 @@ public class Deposito extends Transaccion{
                 montoDeposito = deposito4;
                 break;
             default:
-                montoDeposito = 2;
+                montoDeposito = 0;
         }
 
         if(montoDeposito <= dispensador.getCantidadDinero()){

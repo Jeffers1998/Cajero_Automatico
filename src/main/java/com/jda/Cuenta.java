@@ -42,7 +42,7 @@ public class Cuenta {
 	}
 
 	public void depositarDinero(double cantidad) {
-		this.saldoTotal -= cantidad;
+		this.saldoTotal += cantidad;
 
 	}
 }
