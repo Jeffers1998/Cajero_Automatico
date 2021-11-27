@@ -15,6 +15,10 @@ public class BaseDeDatos {
 		cuentas[1] = new Cuenta(2, 5678, 500, 600);
 		cuentas[2] = new Cuenta(3, 4321, 1000, 1100);
 	}
+
+	public BaseDeDatos(Cuenta[] cuentas){
+		this.cuentas = cuentas;
+	}
 	/**
 	 * 
 	 * @param numeroCuenta El numero de cuenta a validar
@@ -35,7 +39,7 @@ public class BaseDeDatos {
 	 */
 	public double getDineroDisponible(int numeroCuenta) {
 		if (buscarCuenta(numeroCuenta) != null) {
-			return buscarCuenta(numeroCuenta).getSaldoTotal();
+			return buscarCuenta(numeroCuenta).getSaldoDisponible();
 		}
 		return -1;
 	}
