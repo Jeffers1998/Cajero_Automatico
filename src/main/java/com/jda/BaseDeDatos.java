@@ -33,7 +33,10 @@ public class BaseDeDatos {
 	}
 
 	public boolean compararPin(int numeroCuenta, int pin){
-		return true;
+		if (buscarCuenta(numeroCuenta) != null) {
+			return buscarCuenta(numeroCuenta).validarPin(pin);
+		}
+		return false;
 	}
 	/**
 	 * 
