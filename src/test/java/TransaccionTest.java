@@ -1,5 +1,3 @@
-package test.java;
-
 import com.jda.Transaccion;
 import com.jda.TransaccionInvalidaException;
 import org.junit.Test;

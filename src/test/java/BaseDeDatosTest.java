@@ -1,5 +1,3 @@
-package test.java;
-
 import com.jda.BaseDeDatos;
 import com.jda.CajeroAutomatico;
 import com.jda.Cuenta;
