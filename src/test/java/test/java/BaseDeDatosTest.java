@@ -1,7 +1,10 @@
+package test.java;
+
 import com.jda.BaseDeDatos;
 import com.jda.CajeroAutomatico;
 import com.jda.Cuenta;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.Mockito;
@@ -16,6 +19,13 @@ public class BaseDeDatosTest {
     private int dineroEsperado;
 
     BaseDeDatos baseDeDatos;
+
+    @Test(timeout = 1)
+    public void compararPin() {
+        BaseDeDatos baseDatos = BaseDeDatos.getInstance();
+        boolean actual = baseDatos.compararPin(1, 1234);
+        assertTrue(actual);
+    }
 
     @Parameterized.Parameters
     public static List<Object[]> parameters(){
@@ -49,4 +59,5 @@ public class BaseDeDatosTest {
         double dineroObtenido = baseDeDatos.getDineroDisponible(numeroCuenta);
         assertEquals(dineroEsperado, dineroObtenido, 0);
     }
+
 }

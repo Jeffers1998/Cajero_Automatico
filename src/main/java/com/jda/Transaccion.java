@@ -33,6 +33,8 @@ public abstract class Transaccion {
 			case DEPOSITO:
 				myTransaccion = new Deposito(numeroCuenta);
 				break;
+			default:
+				throw new TransaccionInvalidaException();
 		}
 		return myTransaccion;
 	}
