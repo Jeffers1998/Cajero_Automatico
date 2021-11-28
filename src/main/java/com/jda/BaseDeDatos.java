@@ -65,7 +65,6 @@ public class BaseDeDatos {
 	public void depositarDinero(int numeroCuenta, double cantidad ) {
 		if (buscarCuenta(numeroCuenta) != null) {
 			buscarCuenta(numeroCuenta).depositarDinero(cantidad);
-
 		}
 	}
 
