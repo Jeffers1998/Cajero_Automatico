@@ -31,7 +31,10 @@ public class BaseDeDatos {
 		}
 		return false;
 	}
-	
+
+	public boolean compararPin(int numeroCuenta, int pin){
+		return true;
+	}
 	/**
 	 * 
 	 * @param numeroCuenta
