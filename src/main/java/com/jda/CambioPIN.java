@@ -54,8 +54,8 @@ public class CambioPIN extends Transaccion{
     }
 
     public boolean validarPin(int pin){
-        if (!BaseDeDatos.getInstance().compararPin(numeroCuenta, pin)) {
-            if ( !tienePatronComun(pin) && obtenerLongitud(pin) >= 4) {
+        if (!baseDatos.compararPin(numeroCuenta, pin)) {
+            if (!tienePatronComun(pin) && obtenerLongitud(pin) >= 4) {
                 return true;
             }
         }
@@ -63,7 +63,6 @@ public class CambioPIN extends Transaccion{
     }
 
     public int generarPin(){
-        GeneradorPIN nuevoPin = new GeneradorPIN();
-        return nuevoPin.generar();
+        return generadorPIN.generar();
     }
 }
