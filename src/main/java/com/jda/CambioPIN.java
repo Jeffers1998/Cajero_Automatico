@@ -25,18 +25,45 @@ public class CambioPIN extends Transaccion{
     }
 
     public int obtenerLongitud(int pin){
-        return -1;
+        return pin+"".length();
     }
 
     public boolean tienePatronComun(int pin){
-        return true;
+        
+        String pinString = String.valueOf(pin);
+        String[] pinArray = pinString.split("(?<=.)");
+
+        int[] valores = new int[pinArray.length];
+
+        for(int i = 0; i < valores.length; i++){
+            valores[i] = Integer.parseInt(pinArray[i]);
+        }
+
+        for(int i = 2; i < valores.length; i++) {
+            if (valores[i - 2] == valores[i] && valores[i - 1] == valores[i]) {
+                return true;
+            }
+        }
+        for(int i = 2; i < valores.length; i++) {
+            if ( (valores[i] == valores[i - 1] + 1 && valores[i - 1] + 1 == valores[i - 2] + 2)
+            || (valores[i] == valores[i-1] - 1 && valores[i - 1] == valores[i - 2] - 2)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean validarPin(int pin){
+        if (!BaseDeDatos.getInstance().compararPin(numeroCuenta, pin)) {
+            if ( !tienePatronComun(pin) && obtenerLongitud(pin) >= 4) {
+                return true;
+            }
+        }
         return false;
     }
 
     public int generarPin(){
-        return -1;
+        GeneradorPIN nuevoPin = new GeneradorPIN();
+        return nuevoPin.generar();
     }
 }
