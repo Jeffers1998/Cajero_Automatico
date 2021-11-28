@@ -25,7 +25,7 @@ public class CajeroAutomatico {
 				Transaccion transaccionActual = Transaccion.crearTransaccion(transaccionEscogida, numeroCuentaActual);
 				transaccionActual.realizar();
 			}else
-				break;
+				solicitarAutenticacion();
 		}
 	}
 	
@@ -62,13 +62,14 @@ public class CajeroAutomatico {
 		String entrada = teclado.getEntrada();
 		
 		switch(entrada) {
-		case "a":
-			return Transaccion.RETIRO;
-		case "b":
-			return Transaccion.CONSULTA_SALDO;
+			case "a":
+				return Transaccion.RETIRO;
+			case "b":
+				return Transaccion.CONSULTA_SALDO;
 			case "c":
-
-		    return Transaccion.DEPOSITO;
+		    	return Transaccion.DEPOSITO;
+			case "d":
+				return -1;
 		}
 		
 		return -1;
