@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GeneradorPINTest {
 
     @Test
-    public void generar() {
+    public void generar_int_four_numbers() {
         GeneradorPIN generadorPin = new GeneradorPIN();
         int actual = generadorPin.generar();
         assertThat(actual, new BaseMatcher<Integer>() {

@@ -19,7 +19,7 @@ public class BaseDeDatosTest {
     BaseDeDatos baseDeDatos;
 
     @Test(timeout = 1)
-    public void compararPin() {
+    public void time_out_compararPin() {
         BaseDeDatos baseDatos = BaseDeDatos.getInstance();
         boolean actual = baseDatos.compararPin(1, 1234);
         assertTrue(actual);
@@ -41,7 +41,7 @@ public class BaseDeDatosTest {
     }
 
     @org.junit.Test
-    public void getSaldoTotal() {
+    public void get_int_SaldoTotal_with_numCount() {
         Cuenta cuentaMock = Mockito.mock(Cuenta.class);
         double expected = 100.0;
         Mockito.when(cuentaMock.getSaldoTotal()).thenReturn(expected);
@@ -53,7 +53,7 @@ public class BaseDeDatosTest {
     }
 
     @org.junit.Test
-    public void getDineroDisponible() {
+    public void get_int_DineroDisponible_with_numCount() {
         double dineroObtenido = baseDeDatos.getDineroDisponible(numeroCuenta);
         assertEquals(dineroEsperado, dineroObtenido, 0);
     }
