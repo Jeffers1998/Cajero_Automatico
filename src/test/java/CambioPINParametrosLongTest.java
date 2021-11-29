@@ -16,7 +16,7 @@ public class CambioPINParametrosLongTest {
 
     @Parameterized.Parameters
     public static Iterable<Object[]> parameters() {
-        List<Object[]> objects = new ArrayList<Object[]>();
+        List<Object[]> objects = new ArrayList<>();
         objects.add(new Object[]{12,2});
         objects.add(new Object[]{147158,6});
         objects.add(new Object[]{10721,5});
@@ -31,9 +31,8 @@ public class CambioPINParametrosLongTest {
         this.expected = expected;
     }
 
-
     @Test
-    public void given_parameters_and_return_long () {
+    public void give_parameters_return_long () {
         cambioPin = new CambioPIN(1);
         int actual = cambioPin.obtenerLongitud(pin);
         assertEquals(expected, actual);
