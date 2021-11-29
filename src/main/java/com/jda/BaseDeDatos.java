@@ -40,7 +40,6 @@ public class BaseDeDatos {
 	}
 	/**
 	 * 
-	 * @param numeroCuenta
 	 * @return Devuelve el dinero disponible de la cuenta que tiene el numero proporcionado
 	 */
 	public double getDineroDisponible(int numeroCuenta) {
@@ -76,9 +75,12 @@ public class BaseDeDatos {
 				return cuenta;
 			}
 		}
-
 		cuenta = null;
 		return cuenta;
+	}
+
+	public void cambiarPIN(int numCuenta, int nuevoPin){
+		if (buscarCuenta(numCuenta) != null) buscarCuenta(numCuenta).cambiarPIN(nuevoPin);
 	}
 	
 }
