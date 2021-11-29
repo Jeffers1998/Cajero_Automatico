@@ -3,9 +3,9 @@ package com.jda;
 public class CajeroAutomatico {
 	private boolean usuarioAutenticado;
 	
-	private Pantalla pantalla;
-	private Teclado teclado;
-	private BaseDeDatos baseDatos;
+	private final Pantalla pantalla;
+	private final Teclado teclado;
+	private final BaseDeDatos baseDatos;
 	private int numeroCuentaActual;
 
 	public CajeroAutomatico() {
@@ -24,8 +24,11 @@ public class CajeroAutomatico {
 			if(! (transaccionEscogida == -1)) {
 				Transaccion transaccionActual = Transaccion.crearTransaccion(transaccionEscogida, numeroCuentaActual);
 				transaccionActual.realizar();
-			}else
-				solicitarAutenticacion();
+			}else {
+				usuarioAutenticado = false;
+				iniciar();
+
+			}
 		}
 	}
 	
@@ -61,7 +64,8 @@ public class CajeroAutomatico {
 				"\na. Realizar un retiro" +
 				"\nb. Consultar cuenta" +
 				"\nc. Realizar un deposito" +
-				"\nd. CambiarPIN");
+				"\nd. CambiarPIN" +
+				"\n-- Presione cualquier otra tecla para salir --");
 
 		String entrada = teclado.getEntrada();
 		
