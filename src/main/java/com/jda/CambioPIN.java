@@ -21,18 +21,36 @@ public class CambioPIN extends Transaccion{
 
     @Override
     public void realizar() {
-        pantalla.mostrarMensaje("Por favor escriba su nuevo PIN");
-        int nuevoPIN = Integer.parseInt(teclado.getEntrada());
-
-        if ( validarPin(nuevoPIN)){
-            baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
-            pantalla.mostrarMensaje("**** Su PIN ha cambiado Exitosamente ****");
-        }else {
-            pantalla.mostrarMensaje("El PIN ingresado no puede ser aceptado, recuerde\n" +
-                    "- Usar solo 4 dígitos\n" +
-                    "- No usar patrones comunes como 1234 o 1111\n" +
-                    "- No ingresar el mismo PIN que ya utiliza\n");
+        int nuevoPIN = 0;
+        pantalla.mostrarMensaje("a. Ingresar PIN\n" +
+                                "b. Generar PIN automáticamente\n" +
+                                " --- Presione cualquier otra tecla para volver a el menú de opciones ---");
+        String elección = teclado.getEntrada();
+        switch (elección){
+            case "a":
+                pantalla.mostrarMensaje("Por favor escriba su nuevo PIN");
+                nuevoPIN = Integer.parseInt(teclado.getEntrada());
+                if ( validarPin(nuevoPIN)){
+                    baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
+                    pantalla.mostrarMensaje("**** Su PIN ha cambiado Exitosamente ****");
+                }else {
+                    pantalla.mostrarMensaje("El PIN ingresado no puede ser aceptado, recuerde\n" +
+                            "- Usar solo 4 dígitos\n" +
+                            "- No usar patrones comunes como 1234 o 1111\n" +
+                            "- No ingresar el mismo PIN que ya utiliza\n");
+                }
+                break;
+            case "b":
+                GeneradorPIN generadorPIN = new GeneradorPIN();
+                nuevoPIN = generadorPIN.generar();
+                baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
+                pantalla.mostrarMensaje("Su nuevo PIN es: " + nuevoPIN);
+                break;
+            default:
+                break;
         }
+
+
     }
 
     public int obtenerLongitud(int pin){
