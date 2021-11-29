@@ -3,9 +3,9 @@ package com.jda;
 public class CajeroAutomatico {
 	private boolean usuarioAutenticado;
 	
-	private Pantalla pantalla;
-	private Teclado teclado;
-	private BaseDeDatos baseDatos;
+	private final Pantalla pantalla;
+	private final Teclado teclado;
+	private final BaseDeDatos baseDatos;
 	private int numeroCuentaActual;
 
 	public CajeroAutomatico() {
@@ -24,8 +24,11 @@ public class CajeroAutomatico {
 			if(! (transaccionEscogida == -1)) {
 				Transaccion transaccionActual = Transaccion.crearTransaccion(transaccionEscogida, numeroCuentaActual);
 				transaccionActual.realizar();
-			}else
-				solicitarAutenticacion();
+			}else {
+				usuarioAutenticado = false;
+				iniciar();
+
+			}
 		}
 	}
 	
@@ -47,8 +50,7 @@ public class CajeroAutomatico {
 
 	private int getPin() {
 		pantalla.mostrarMensaje("Ingrese su PIN");
-		int pin = Integer.parseInt(teclado.getEntrada());
-		return pin;
+		return Integer.parseInt(teclado.getEntrada());
 	}
 
 	private int getNumeroCuenta() {
@@ -58,7 +60,13 @@ public class CajeroAutomatico {
 
 
 	private int solicitarTransaccion() {
-		pantalla.mostrarMensaje("Seleccione una opcion:\na. Realizar un retiro\nb. Consultar cuenta\nc. Realizar un deposito");
+		pantalla.mostrarMensaje("Seleccione una opcion:" +
+				"\na. Realizar un retiro" +
+				"\nb. Consultar cuenta" +
+				"\nc. Realizar un deposito" +
+				"\nd. CambiarPIN" +
+				"\n-- Presione cualquier otra tecla para salir --");
+
 		String entrada = teclado.getEntrada();
 		
 		switch(entrada) {
@@ -69,10 +77,10 @@ public class CajeroAutomatico {
 			case "c":
 		    	return Transaccion.DEPOSITO;
 			case "d":
+				return Transaccion.CAMBIARPIN;
+			default:
 				return -1;
 		}
-		
-		return -1;
 	}
 	
 }

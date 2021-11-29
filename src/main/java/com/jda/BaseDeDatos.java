@@ -33,11 +33,13 @@ public class BaseDeDatos {
 	}
 
 	public boolean compararPin(int numeroCuenta, int pin){
-		return true;
+		if (buscarCuenta(numeroCuenta) != null) {
+			return buscarCuenta(numeroCuenta).validarPin(pin);
+		}
+		return false;
 	}
 	/**
 	 * 
-	 * @param numeroCuenta
 	 * @return Devuelve el dinero disponible de la cuenta que tiene el numero proporcionado
 	 */
 	public double getDineroDisponible(int numeroCuenta) {
@@ -62,7 +64,6 @@ public class BaseDeDatos {
 	public void depositarDinero(int numeroCuenta, double cantidad ) {
 		if (buscarCuenta(numeroCuenta) != null) {
 			buscarCuenta(numeroCuenta).depositarDinero(cantidad);
-
 		}
 	}
 
@@ -74,9 +75,12 @@ public class BaseDeDatos {
 				return cuenta;
 			}
 		}
-
 		cuenta = null;
 		return cuenta;
+	}
+
+	public void cambiarPIN(int numCuenta, int nuevoPin){
+		if (buscarCuenta(numCuenta) != null) buscarCuenta(numCuenta).cambiarPIN(nuevoPin);
 	}
 	
 }

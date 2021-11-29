@@ -45,4 +45,8 @@ public class Cuenta {
 		this.saldoTotal += cantidad;
 
 	}
+
+	public void cambiarPIN(int pin) {
+		this.pin = pin;
+	}
 }
