@@ -3,7 +3,7 @@ package com.jda;
 public class CambioPIN extends Transaccion{
     private Pantalla pantalla;
     private Teclado teclado;
-    private BaseDeDatos baseDatos;
+    private final BaseDeDatos baseDatos;
     private GeneradorPIN generadorPIN;
 
     public CambioPIN(int numeroCuenta) {
@@ -21,11 +21,23 @@ public class CambioPIN extends Transaccion{
 
     @Override
     public void realizar() {
+        pantalla.mostrarMensaje("Por favor escriba su nuevo PIN");
+        int nuevoPIN = Integer.parseInt(teclado.getEntrada());
 
+        if ( validarPin(nuevoPIN)){
+            baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
+            pantalla.mostrarMensaje("**** Su PIN ha cambiado Exitosamente ****");
+        }else {
+            pantalla.mostrarMensaje("El PIN ingresado no puede ser aceptado, recuerde\n" +
+                    "- Usar solo 4 dígitos\n" +
+                    "- No usar patrones comunes como 1234 o 1111\n" +
+                    "- No ingresar el mismo PIN que ya utiliza\n");
+        }
     }
 
     public int obtenerLongitud(int pin){
-        return pin+"".length();
+        String nuevoPin = pin+"";
+        return nuevoPin.length();
     }
 
     public boolean tienePatronComun(int pin){
@@ -53,11 +65,9 @@ public class CambioPIN extends Transaccion{
         return false;
     }
 
-    public boolean validarPin(int pin){
+    public boolean validarPin(int pin){ // puede ser una refactorización
         if (!baseDatos.compararPin(numeroCuenta, pin)) {
-            if (!tienePatronComun(pin) && obtenerLongitud(pin) >= 4) {
-                return true;
-            }
+            return !tienePatronComun(pin) && obtenerLongitud(pin) >= 4;
         }
         return false;
     }
