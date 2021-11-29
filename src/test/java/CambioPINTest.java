@@ -33,7 +33,7 @@ public class CambioPINTest {
     }
 
     @Test
-    public void generarPin() {
+    public void get_int_generarPin() {
         GeneradorPIN generadorPin = Mockito.mock(GeneradorPIN.class);
         int expected = 1178;
         Mockito.when(generadorPin.generar()).thenReturn(expected);
