@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class CambioPINTest {
 
     @Test
-    public void validarPin() {
+    public void validarPin_when_is_wrong() {
         int numeroCuenta = 1;
         int pinValidar = 1234;
 
@@ -19,6 +19,17 @@ public class CambioPINTest {
         CambioPIN cambioPIN = new CambioPIN(numeroCuenta, baseDatos, null);
         boolean actual = cambioPIN.validarPin(pinValidar);
         assertFalse(actual);
+    }
+    @Test
+    public void validarPin_when_is_ok() {
+        int numeroCuenta = 1;
+        int pinValidar = 1684;
+
+        BaseDeDatos baseDatos = Mockito.mock(BaseDeDatos.class);
+        Mockito.when(baseDatos.compararPin(numeroCuenta, pinValidar)).thenReturn(false);
+        CambioPIN cambioPIN = new CambioPIN(numeroCuenta, baseDatos, null);
+        boolean actual = cambioPIN.validarPin(pinValidar);
+        assertTrue(actual);
     }
 
     @Test

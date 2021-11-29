@@ -25,7 +25,8 @@ public class CambioPIN extends Transaccion{
     }
 
     public int obtenerLongitud(int pin){
-        return pin+"".length();
+        String nuevoPin = pin+"";
+        return nuevoPin.length();
     }
 
     public boolean tienePatronComun(int pin){
