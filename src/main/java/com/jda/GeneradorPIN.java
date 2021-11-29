@@ -39,4 +39,6 @@ public class GeneradorPIN {
         return Integer.parseInt(cadenaNumeros);
     }
 
+
+
 }
