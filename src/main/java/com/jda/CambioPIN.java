@@ -41,7 +41,6 @@ public class CambioPIN extends Transaccion{
                 }
                 break;
             case "b":
-                GeneradorPIN generadorPIN = new GeneradorPIN();
                 nuevoPIN = generadorPIN.generar();
                 baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
                 pantalla.mostrarMensaje("Su nuevo PIN es: " + nuevoPIN);
@@ -102,9 +101,11 @@ public class CambioPIN extends Transaccion{
         return valores;
     } 
 
-    public boolean validarPin(int pin){ // puede ser una refactorización
+    public boolean validarPin(int pin){
         if (!baseDatos.compararPin(numeroCuenta, pin)) {
-            return !tienePatronComun(pin) && obtenerLongitud(pin) == 4;
+            if(!tienePatronComun(pin) && obtenerLongitud(pin) == 4) {
+                return true;
+            }
         }
         return false;
     }
