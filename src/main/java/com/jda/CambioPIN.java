@@ -22,6 +22,7 @@ public class CambioPIN extends Transaccion{
     @Override
     public void realizar() {
         int nuevoPIN;
+        boolean pinCambiado;
         pantalla.mostrarMensaje("a. Ingresar PIN\n" +
                                 "b. Generar PIN automáticamente\n" +
                                 " --- Presione cualquier otra tecla para volver a el menú de opciones ---");
@@ -31,8 +32,13 @@ public class CambioPIN extends Transaccion{
                 pantalla.mostrarMensaje("Por favor escriba su nuevo PIN");
                 nuevoPIN = Integer.parseInt(teclado.getEntrada());
                 if ( validarPin(nuevoPIN)){
-                    baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
-                    pantalla.mostrarMensaje("**** Su PIN ha cambiado Exitosamente ****");
+                    pinCambiado = baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
+                    if (pinCambiado) {
+                        pantalla.mostrarMensaje("**** Su PIN ha cambiado Exitosamente ****");
+                    } else {
+                        pantalla.mostrarMensaje("Error en la base de datos, no se ha completado cambio PIN");
+                    }
+
                 }else {
                     pantalla.mostrarMensaje("El PIN ingresado no puede ser aceptado, recuerde\n" +
                             "- Usar solo 4 dígitos\n" +
@@ -42,12 +48,18 @@ public class CambioPIN extends Transaccion{
                 break;
             case "b":
                 nuevoPIN = generadorPIN.generar();
-                baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
-                pantalla.mostrarMensaje("Su nuevo PIN es: " + nuevoPIN);
+                pinCambiado = baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
+                if (pinCambiado) {
+                    pantalla.mostrarMensaje("Su nuevo PIN es: " + nuevoPIN);
+                } else {
+                    pantalla.mostrarMensaje("Error en la base de datos no se ha completado cambio PIN");
+                }
+
                 break;
             default:
                 break;
         }
+
 
 
     }
@@ -78,20 +90,17 @@ public class CambioPIN extends Transaccion{
     private boolean isTresNumeroSeguidoIguales(int miPinArray[], int index ) {
         boolean esIgualUltimo = miPinArray[index - 2] == miPinArray[index];
         boolean esIgualPenultimo = miPinArray[index - 1] == miPinArray[index];
-        boolean tresNumerosSeguidosIguales = esIgualUltimo && esIgualPenultimo;
-        return tresNumerosSeguidosIguales;
+        return esIgualUltimo && esIgualPenultimo;
     }
     private boolean tresNumSecuenciaDescendente(int array[], int index){
         boolean precedeUltimo = array[index] == array[index-1] - 1;
         boolean ultimoPrecedePenultimo = array[index - 1] == array[index-2] - 2;
-        boolean tresNumSecuenciaDescendente = precedeUltimo && ultimoPrecedePenultimo;
-        return tresNumSecuenciaDescendente;
+        return precedeUltimo && ultimoPrecedePenultimo;
     }
     private boolean tresNumSecuenciaAscendente(int array[], int index){
         boolean esSecuenciaDelUltimo = array[index] == array[index - 1] + 1;
         boolean esSecuenciaDelPenultimo = array[index - 1] + 1 == array[index - 2] + 2;
-        boolean tresNumSecuenciaAscendente = esSecuenciaDelUltimo && esSecuenciaDelPenultimo;
-        return tresNumSecuenciaAscendente;
+        return esSecuenciaDelUltimo && esSecuenciaDelPenultimo;
     }
     private int [] getArrayInt(String[] pinArray){
         int[] valores = new int[pinArray.length];
@@ -103,9 +112,7 @@ public class CambioPIN extends Transaccion{
 
     public boolean validarPin(int pin){
         if (!baseDatos.compararPin(numeroCuenta, pin)) {
-            if(!tienePatronComun(pin) && obtenerLongitud(pin) == 4) {
-                return true;
-            }
+            return !tienePatronComun(pin) && obtenerLongitud(pin) == 4;
         }
         return false;
     }
