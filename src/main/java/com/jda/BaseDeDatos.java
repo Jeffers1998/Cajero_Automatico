@@ -43,6 +43,7 @@ public class BaseDeDatos {
 	 * @return Devuelve el dinero disponible de la cuenta que tiene el numero proporcionado
 	 */
 	public double getDineroDisponible(int numeroCuenta) {
+
 		if (buscarCuenta(numeroCuenta) != null) {
 			return buscarCuenta(numeroCuenta).getSaldoDisponible();
 		}
@@ -79,8 +80,20 @@ public class BaseDeDatos {
 		return cuenta;
 	}
 
-	public void cambiarPIN(int numCuenta, int nuevoPin){
-		if (buscarCuenta(numCuenta) != null) buscarCuenta(numCuenta).cambiarPIN(nuevoPin);
+	public boolean cambiarPIN (int numCuenta, int nuevoPin) {
+		try {
+			Thread.sleep(10);
+			if (buscarCuenta(numCuenta) != null ) {
+				buscarCuenta(numCuenta).cambiarPIN(nuevoPin);
+				return true;
+			}else {
+				return false;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return false;
+		}
+
 	}
 	
 }

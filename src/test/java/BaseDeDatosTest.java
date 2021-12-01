@@ -58,4 +58,11 @@ public class BaseDeDatosTest {
         assertEquals(dineroEsperado, dineroObtenido, 0);
     }
 
+    @Test(timeout = 50)
+    public void dataBase_assert_change_PIN(){
+        BaseDeDatos baseDeDatos = BaseDeDatos.getInstance();
+        boolean actual = baseDeDatos.cambiarPIN(1, 1359);
+        assertTrue(actual);
+    }
+
 }

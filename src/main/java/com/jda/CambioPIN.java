@@ -21,18 +21,24 @@ public class CambioPIN extends Transaccion{
 
     @Override
     public void realizar() {
-        int nuevoPIN = 0;
+        int nuevoPIN;
+        boolean pinCambiado;
         pantalla.mostrarMensaje("a. Ingresar PIN\n" +
                                 "b. Generar PIN automáticamente\n" +
                                 " --- Presione cualquier otra tecla para volver a el menú de opciones ---");
-        String elección = teclado.getEntrada();
-        switch (elección){
+        String eleccion = teclado.getEntrada();
+        switch (eleccion){
             case "a":
                 pantalla.mostrarMensaje("Por favor escriba su nuevo PIN");
                 nuevoPIN = Integer.parseInt(teclado.getEntrada());
                 if ( validarPin(nuevoPIN)){
-                    baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
-                    pantalla.mostrarMensaje("**** Su PIN ha cambiado Exitosamente ****");
+                    pinCambiado = baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
+                    if (pinCambiado) {
+                        pantalla.mostrarMensaje("**** Su PIN ha cambiado Exitosamente ****");
+                    } else {
+                        pantalla.mostrarMensaje("Error en la base de datos, no se ha completado cambio PIN");
+                    }
+
                 }else {
                     pantalla.mostrarMensaje("El PIN ingresado no puede ser aceptado, recuerde\n" +
                             "- Usar solo 4 dígitos\n" +
@@ -41,14 +47,19 @@ public class CambioPIN extends Transaccion{
                 }
                 break;
             case "b":
-                GeneradorPIN generadorPIN = new GeneradorPIN();
                 nuevoPIN = generadorPIN.generar();
-                baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
-                pantalla.mostrarMensaje("Su nuevo PIN es: " + nuevoPIN);
+                pinCambiado = baseDatos.cambiarPIN(numeroCuenta, nuevoPIN);
+                if (pinCambiado) {
+                    pantalla.mostrarMensaje("Su nuevo PIN es: " + nuevoPIN);
+                } else {
+                    pantalla.mostrarMensaje("Error en la base de datos no se ha completado cambio PIN");
+                }
+
                 break;
             default:
                 break;
         }
+
 
 
     }
@@ -62,30 +73,46 @@ public class CambioPIN extends Transaccion{
         
         String pinString = String.valueOf(pin);
         String[] pinArray = pinString.split("(?<=.)");
+        int[] miPinArray = getArrayInt(pinArray);
 
-        int[] valores = new int[pinArray.length];
-
-        for(int i = 0; i < valores.length; i++){
-            valores[i] = Integer.parseInt(pinArray[i]);
-        }
-
-        for(int i = 2; i < valores.length; i++) {
-            if (valores[i - 2] == valores[i] && valores[i - 1] == valores[i]) {
+        for(int i = 2; i < miPinArray.length; i++) {
+            if ( isTresNumeroSeguidoIguales(miPinArray,i)) {
                 return true;
             }
         }
-        for(int i = 2; i < valores.length; i++) {
-            if ( (valores[i] == valores[i - 1] + 1 && valores[i - 1] + 1 == valores[i - 2] + 2)
-            || (valores[i] == valores[i-1] - 1 && valores[i - 1] == valores[i - 2] - 2)) {
+        for(int i = 2; i < miPinArray.length; i++) {
+            if ( tresNumSecuenciaAscendente(miPinArray,i) || tresNumSecuenciaDescendente(miPinArray,i)) {
                 return true;
             }
         }
         return false;
     }
+    private boolean isTresNumeroSeguidoIguales(int miPinArray[], int index ) {
+        boolean esIgualUltimo = miPinArray[index - 2] == miPinArray[index];
+        boolean esIgualPenultimo = miPinArray[index - 1] == miPinArray[index];
+        return esIgualUltimo && esIgualPenultimo;
+    }
+    private boolean tresNumSecuenciaDescendente(int array[], int index){
+        boolean precedeUltimo = array[index] == array[index-1] - 1;
+        boolean ultimoPrecedePenultimo = array[index - 1] == array[index-2] - 2;
+        return precedeUltimo && ultimoPrecedePenultimo;
+    }
+    private boolean tresNumSecuenciaAscendente(int array[], int index){
+        boolean esSecuenciaDelUltimo = array[index] == array[index - 1] + 1;
+        boolean esSecuenciaDelPenultimo = array[index - 1] + 1 == array[index - 2] + 2;
+        return esSecuenciaDelUltimo && esSecuenciaDelPenultimo;
+    }
+    private int [] getArrayInt(String[] pinArray){
+        int[] valores = new int[pinArray.length];
+        for(int i = 0; i < valores.length; i++){
+            valores[i] = Integer.parseInt(pinArray[i]);
+        }
+        return valores;
+    } 
 
-    public boolean validarPin(int pin){ // puede ser una refactorización
+    public boolean validarPin(int pin){
         if (!baseDatos.compararPin(numeroCuenta, pin)) {
-            return !tienePatronComun(pin) && obtenerLongitud(pin) >= 4;
+            return !tienePatronComun(pin) && obtenerLongitud(pin) == 4;
         }
         return false;
     }

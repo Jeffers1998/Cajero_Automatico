@@ -41,4 +41,5 @@ public class CambioPINTest {
         int actual = cambioPIN.generarPin();
         assertEquals(expected, actual);
     }
+
 }
