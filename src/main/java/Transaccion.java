@@ -1,5 +1,3 @@
-package com.jda;
-
 public abstract class Transaccion {
 	//Variables estaticas usadas como opciones para el metodo crearTransaccion
 	public static final  int RETIRO = 0;

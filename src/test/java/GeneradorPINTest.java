@@ -1,10 +1,7 @@
-import com.jda.GeneradorPIN;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 public class GeneradorPINTest {
 

@@ -1,5 +1,3 @@
-package com.jda;
-
 public class Pantalla {
 	private static Pantalla instance = new Pantalla();
 	

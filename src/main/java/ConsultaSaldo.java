@@ -1,4 +1,3 @@
-package com.jda;
 public class ConsultaSaldo extends Transaccion{
 
 	private BaseDeDatos baseDatos;

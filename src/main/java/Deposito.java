@@ -1,5 +1,3 @@
-package com.jda;
-
 public class Deposito extends Transaccion{
 
     private final DispensadorDinero dispensador;

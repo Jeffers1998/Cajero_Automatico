@@ -1,5 +1,3 @@
-package com.jda;
-
 public class CambioPIN extends Transaccion{
     private Pantalla pantalla;
     private Teclado teclado;

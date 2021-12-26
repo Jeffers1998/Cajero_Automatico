@@ -1,5 +1,3 @@
-package com.jda;
-
 public class BaseDeDatos {
 	private static final BaseDeDatos instance = new BaseDeDatos();
 	
